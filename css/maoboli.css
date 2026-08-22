@@ -469,33 +469,183 @@ a:visited {
 .main-footer .cc-license a:hover {
     color: rgba(255, 255, 255, 1);
 }
-/* ========== 响应式：移动端 ========== */
+/* ========== 移动端适配（≤768px） ========== */
 @media (max-width: 768px) {
     :root {
-        --page-padding: 12px;
-        --gap: 12px;
-        --border-radius: 20px;
+        --page-padding: 10px; /* 页面边距缩小 */
+        --gap: 10px; /* 元素间距缩小 */
+        --border-radius: 20px; /* 圆角适当缩小 */
     }
 
+    body {
+        /* 移动端禁用 fixed 背景，避免 iOS 滚动问题 */
+        background-attachment: scroll;
+    }
+
+    /* 页面容器：只保留主内容区，侧栏脱离文档流 */
+    .page-container {
+        flex-direction: column;
+        height: 100vh;
+        padding: var(--page-padding);
+        gap: 0;
+    }
+
+    /* 侧边栏：变为覆盖层 */
     .sidebar {
-        flex: 0 0 100% !important;
-        position: absolute;
-        z-index: 20;
-        width: calc(100% - 2 * var(--page-padding));
+        position: fixed;
+        top: var(--page-padding);
+        left: var(--page-padding);
+        bottom: var(--page-padding);
+        width: min(80%, 320px) !important; /* 最大宽度 320px */
+        flex: none !important;
+        z-index: 100;
+        transform: translateX(calc(-100% - var(--page-padding)));
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        border-radius: var(--border-radius);
+        overflow-y: auto; /* 允许内部滚动 */
     }
 
-    .sidebar-collapsed {
-        transform: translateX(-100%);
+        /* 侧栏展开状态 */
+        .sidebar:not(.sidebar-collapsed) {
+            transform: translateX(0);
+        }
+
+    /* 主内容区：铺满全屏 */
+    .main-content {
+        flex: 1 1 100% !important;
+        width: 100%;
+        height: 100%;
+        padding: 30px 20px;
+        border-radius: var(--border-radius);
     }
 
-    .main-content h1,
-    .page-content h1 {
-        font-size: 2rem;
+        /* 主内容区在侧栏展开时略微变暗（可选） */
+        .main-content::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 5;
+            border-radius: inherit;
+        }
+
+    .sidebar:not(.sidebar-collapsed) + .main-content::after {
+        opacity: 1;
+        pointer-events: auto;
     }
 
-    .main-content p,
-    .page-content p {
+    /* 调整 toggle 按钮位置和大小 */
+    .toggle-btn {
+        top: 15px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        z-index: 11;
+    }
+
+    /* 侧栏头部 */
+    .sidebar-header {
+        padding: 30px 15px 15px;
+    }
+
+    .avatar-img,
+    .avatar {
+        width: 70px;
+        height: 70px;
+        font-size: 2.5rem;
+    }
+
+    .sidebar h2 {
+        font-size: 1.3rem;
+    }
+
+    .sidebar-desc {
+        font-size: 0.8rem;
+    }
+
+    /* 导航项 */
+    .sidebar-nav {
+        padding: 15px 10px;
+        gap: 6px;
+    }
+
+    .nav-item {
+        padding: 12px 15px;
+        font-size: 0.95rem;
+        gap: 10px;
+    }
+
+    .nav-icon {
         font-size: 1.1rem;
     }
 
+    /* 侧栏脚注 */
+    .sidebar-footer {
+        padding: 12px 15px;
+        font-size: 0.7rem;
+    }
+
+        .sidebar-footer .cc-license {
+            font-size: 0.6rem;
+        }
+
+    /* 主内容区标题和段落 */
+    .page-content h1,
+    .blog-list h1,
+    .post-full h1,
+    .page-full h1 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+
+    .page-content p,
+    .blog-list .post-item p,
+    .post-full .post-content p,
+    .page-full .page-content-text p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* 博客列表卡片 */
+    .post-item {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+        .post-item h2 {
+            font-size: 1.2rem;
+        }
+
+    /* 文章内容图片等 */
+    .post-content img,
+    .page-content-text img {
+        border-radius: 8px;
+    }
+
+    /* 主界面脚注（侧栏收起时显示） */
+    .main-footer {
+        bottom: 12px;
+        font-size: 0.6rem;
+    }
+
+        .main-footer p {
+            margin-bottom: 2px;
+        }
+
+    /* 分页按钮 */
+    .pagination a {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+}
+@media (max-width: 768px) {
+    body {
+        background-position: center center;
+        background-size: cover;
+    }
 }

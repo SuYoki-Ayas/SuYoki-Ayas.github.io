@@ -57,7 +57,7 @@
                 <article class="page-full">
     <h1>contact</h1>
     <div class="page-content-text">
-        <h1 id="联系SYK"><a href="#联系SYK" class="headerlink" title="联系SYK~"></a>联系SYK~</h1><p><a target="_blank" rel="noopener" href="https://github.com/SuYoki-Ayas/"><strong>Github</strong></a><br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/942153"><strong>洛谷</strong></a><br><strong>邮箱：</strong> <a href="mailto:&#x32;&#49;&#54;&#x37;&#x38;&#48;&#x32;&#x38;&#x35;&#56;&#x40;&#x71;&#x71;&#x2e;&#99;&#x6f;&#109;">2167802858@qq.com</a><br><strong>QQ：</strong> 2167802858</p>
+        <h1 id="联系SYK"><a href="#联系SYK" class="headerlink" title="联系SYK~"></a>联系SYK~</h1><p><a target="_blank" rel="noopener" href="https://github.com/SuYoki-Ayas/"><strong>Github</strong></a><br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/942153"><strong>洛谷</strong></a><br><strong>邮箱：</strong> <a href="mailto:&#50;&#x31;&#54;&#55;&#x38;&#x30;&#50;&#56;&#53;&#56;&#x40;&#x71;&#x71;&#46;&#x63;&#111;&#109;">2167802858@qq.com</a><br><strong>QQ：</strong> 2167802858</p>
 
     </div>
 </article>
@@ -75,38 +75,84 @@
     </div>
 
     <script>
-        (function() {
-            const sidebar = document.getElementById('sidebar');
-            const mainContent = document.getElementById('mainContent');
-            const toggleBtn = document.getElementById('toggleBtn');
-            let sidebarVisible = true;
+    (function() {
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('mainContent');
+        const toggleBtn = document.getElementById('toggleBtn');
+        const overlay = document.getElementById('sidebarOverlay');
+        let sidebarVisible = true;
 
-            toggleBtn.addEventListener('click', function() {
-                sidebarVisible = !sidebarVisible;
-                if (sidebarVisible) {
-                    sidebar.classList.remove('sidebar-collapsed');
-                    mainContent.classList.remove('main-expanded');
-                    mainContent.classList.remove('footer-visible');
-                    toggleBtn.textContent = '☰';
-                } else {
-                    sidebar.classList.add('sidebar-collapsed');
-                    mainContent.classList.add('main-expanded');
-                    mainContent.classList.add('footer-visible');
-                    toggleBtn.textContent = '☰';
-                }
-            });
+        // 移动端初始状态：默认收起
+        if (window.innerWidth <= 768) {
+            sidebar.classList.add('sidebar-collapsed');
+            mainContent.classList.add('main-expanded');
+            mainContent.classList.add('footer-visible');
+            if (overlay) overlay.classList.remove('show');
+            sidebarVisible = false;
+        }
 
-            // 移动端恢复
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 768 && !sidebarVisible) {
-                    sidebar.classList.remove('sidebar-collapsed');
-                    mainContent.classList.remove('main-expanded');
-                    mainContent.classList.remove('footer-visible');
-                    sidebarVisible = true;
-                    toggleBtn.textContent = '☰';
-                }
-            });
-        })();
-    </script>
+        // 展开侧栏
+        function openSidebar() {
+            sidebar.classList.remove('sidebar-collapsed');
+            mainContent.classList.remove('main-expanded');
+            mainContent.classList.remove('footer-visible');
+            if (overlay) overlay.classList.add('show');
+            sidebarVisible = true;
+            toggleBtn.textContent = '☰';
+        }
+
+        // 收起侧栏
+        function closeSidebar() {
+            sidebar.classList.add('sidebar-collapsed');
+            mainContent.classList.add('main-expanded');
+            mainContent.classList.add('footer-visible');
+            if (overlay) overlay.classList.remove('show');
+            sidebarVisible = false;
+            toggleBtn.textContent = '☰';
+        }
+
+        // 点击 ☰ 按钮切换侧栏
+        toggleBtn.addEventListener('click', function(event) {
+            event.stopPropagation();   // 关键：阻止冒泡
+            if (sidebarVisible) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
+        });
+
+        // 点击遮罩层关闭侧栏
+        if (overlay) {
+            overlay.addEventListener('click', closeSidebar);
+        }
+
+        // 移动端点击主内容区关闭侧栏（仅在侧栏展开时）
+        mainContent.addEventListener('click', function() {
+            if (window.innerWidth <= 768 && sidebarVisible) {
+                closeSidebar();
+            }
+        });
+
+        // 窗口尺寸变化时恢复桌面布局
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                // 桌面端确保侧栏展开
+                sidebar.classList.remove('sidebar-collapsed');
+                mainContent.classList.remove('main-expanded');
+                mainContent.classList.remove('footer-visible');
+                if (overlay) overlay.classList.remove('show');
+                sidebarVisible = true;
+                toggleBtn.textContent = '☰';
+            } else {
+                // 移动端自动收起
+                sidebar.classList.add('sidebar-collapsed');
+                mainContent.classList.add('main-expanded');
+                mainContent.classList.add('footer-visible');
+                if (overlay) overlay.classList.remove('show');
+                sidebarVisible = false;
+            }
+        });
+    })();
+</script>
 </body>
 </html>
