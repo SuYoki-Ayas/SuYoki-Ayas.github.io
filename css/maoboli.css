@@ -1,0 +1,501 @@
+/* ========== 基础样式 ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --border-radius: 28px;
+    --gap: 20px;
+    --page-padding: 20px;
+    --glass-bg: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --glass-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: url('/img/beijingtu.png') center/cover no-repeat fixed;
+    position: relative;
+}
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.25);
+        z-index: 0;
+        pointer-events: none;
+    }
+
+/* ========== 页面容器 ========== */
+.page-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    height: 100vh;
+    padding: var(--page-padding);
+    gap: var(--gap);
+}
+
+/* ========== 毛玻璃通用样式 ========== */
+.sidebar,
+.main-content {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--glass-shadow);
+    height: 100%;
+    transition: var(--transition);
+    overflow: hidden;
+}
+
+/* ========== 左侧边栏（30% 宽度） ========== */
+.sidebar {
+    flex: 0 0 calc(30% - var(--gap) * 0.7);
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+}
+
+.sidebar-header {
+    padding: 40px 20px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.avatar {
+    font-size: 3.5rem;
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 15px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.avatar-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover; /* 保证图片不变形 */
+    display: block;
+    margin: 0 auto 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.sidebar-desc {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    letter-spacing: 2px;
+}
+
+/* ========== 导航栏 ========== */
+.sidebar-nav {
+    flex: 1;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 16px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.05rem;
+    background: rgba(255, 255, 255, 0.08);
+    transition: var(--transition);
+    cursor: pointer;
+    user-select: none;
+}
+
+    .nav-item:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateX(5px);
+    }
+
+    .nav-item.active {
+        background: rgba(255, 255, 255, 0.3);
+        font-weight: 600;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+
+.nav-icon {
+    font-size: 1.3rem;
+}
+
+/* ========== 侧栏脚注 ========== */
+.sidebar-footer {
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.7;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+    .sidebar-footer p {
+        margin-bottom: 5px;
+    }
+
+    .sidebar-footer .cc-license {
+        color: #fff;
+        font-size: 0.65rem;
+        opacity: 0.85;
+    }
+
+        .sidebar-footer .cc-license a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: underline;
+        }
+
+/* ========== 右侧主界面 ========== */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    padding: 60px 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.toggle-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.3rem;
+    transition: var(--transition);
+    z-index: 10;
+}
+
+    .toggle-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.1);
+    }
+
+/* ========== 页面内容切换 ========== */
+.page-content {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease;
+}
+
+    .page-content.active {
+        display: flex;
+    }
+
+    .page-content h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+        font-weight: 600;
+    }
+
+    .page-content p {
+        font-size: 1.3rem;
+        opacity: 0.9;
+        line-height: 1.8;
+        margin-bottom: 10px;
+    }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== 主界面脚注（侧栏收起时显示） ========== */
+.main-footer {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    text-align: center;
+    color: #fff;
+    font-size: 0.8rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+    .main-footer p {
+        font-size:0.8rem;
+        margin-bottom: 4px;
+    }
+
+    .main-footer .cc-license a {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.8rem;
+        text-decoration: underline;
+    }
+
+/* 当侧栏收起时，主界面显示脚注 */
+.main-content.footer-visible .main-footer {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+/* ========== 边栏收起状态 ========== */
+.sidebar-collapsed {
+    flex: 0 0 0 !important;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-30px);
+    border: none;
+    box-shadow: none;
+}
+
+.main-expanded {
+    flex: 1 1 100% !important;
+}
+/* ========== 博客列表样式 ========== */
+.blog-list,
+.post-full,
+.page-full {
+    max-width: 800px;
+    width: 100%;
+    text-align: left;
+}
+
+    .blog-list h1,
+    .post-full h1,
+    .page-full h1 {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+.post-item {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+    .post-item:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-3px);
+    }
+
+    .post-item h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+        .post-item h2 a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+            .post-item h2 a:hover {
+                color: #fff;
+                text-decoration: underline;
+            }
+
+.post-meta {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 15px;
+}
+
+.post-item p {
+    font-size: 1rem;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* ========== 文章内容样式 ========== */
+.post-content,
+.page-content-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+    .post-content h1,
+    .post-content h2,
+    .post-content h3,
+    .page-content-text h1,
+    .page-content-text h2,
+    .page-content-text h3 {
+        margin: 20px 0 10px;
+        text-align: left;
+    }
+
+    .post-content p,
+    .page-content-text p {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    .post-content img,
+    .page-content-text img {
+        max-width: 100%;
+        border-radius: 12px;
+        margin: 15px 0;
+    }
+
+    .post-content code,
+    .page-content-text code {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.9em;
+    }
+
+    .post-content pre,
+    .page-content-text pre {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 15px;
+        border-radius: 12px;
+        overflow-x: auto;
+        margin: 15px 0;
+    }
+
+        .post-content pre code,
+        .page-content-text pre code {
+            background: none;
+            padding: 0;
+        }
+
+    .post-content blockquote,
+    .page-content-text blockquote {
+        border-left: 3px solid rgba(255, 255, 255, 0.5);
+        padding-left: 15px;
+        margin: 15px 0;
+        opacity: 0.85;
+    }
+
+    .post-content a,
+    .page-content-text a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: underline;
+    }
+
+/* 分页样式 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+    .pagination a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        transition: all 0.3s;
+    }
+
+        .pagination a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+/* ========== 全局链接颜色：白色 80% 不透明度 ========== */
+a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: underline;
+    transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+a:hover {
+    color: rgba(255, 255, 255, 1);
+    opacity: 1;
+}
+
+a:visited {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* 确保特殊链接也使用相同颜色 */
+.nav-item,
+.sidebar-footer .cc-license a,
+.main-footer .cc-license a {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.nav-item:hover,
+.sidebar-footer .cc-license a:hover,
+.main-footer .cc-license a:hover {
+    color: rgba(255, 255, 255, 1);
+}
+/* ========== 响应式：移动端 ========== */
+@media (max-width: 768px) {
+    :root {
+        --page-padding: 12px;
+        --gap: 12px;
+        --border-radius: 20px;
+    }
+
+    .sidebar {
+        flex: 0 0 100% !important;
+        position: absolute;
+        z-index: 20;
+        width: calc(100% - 2 * var(--page-padding));
+    }
+
+    .sidebar-collapsed {
+        transform: translateX(-100%);
+    }
+
+    .main-content h1,
+    .page-content h1 {
+        font-size: 2rem;
+    }
+
+    .main-content p,
+    .page-content p {
+        font-size: 1.1rem;
+    }
+
+}

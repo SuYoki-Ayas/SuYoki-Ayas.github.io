@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>project | SuYoki 的 Blog~~</title>
+    <link rel="stylesheet" href="/css/maoboli.css">
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+    <div class="page-container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+		<img src="/img/touxiang.png" alt="头像" class="avatar-img">
+		<h2>SuYoki-Ayas</h2>
+        <p class="sidebar-desc">进化中……</p>
+    </div>
+
+    <nav class="sidebar-nav">
+        
+            <a href="/" class="nav-item">
+                <span class="nav-icon">首页</span>
+                <span></span>
+            </a>
+        
+            <a href="/about/" class="nav-item">
+                <span class="nav-icon">关于SYK~</span>
+                <span></span>
+            </a>
+        
+            <a href="/projects/" class="nav-item">
+                <span class="nav-icon">项目</span>
+                <span></span>
+            </a>
+        
+            <a href="/contact/" class="nav-item">
+                <span class="nav-icon">联系SYK~</span>
+                <span></span>
+            </a>
+        
+    </nav>
+
+    <div class="sidebar-footer">
+        <p>© 2026 SuYoki-Ayas</p>
+        <p class="cc-license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank" rel="noopener noreferrer">
+                知识共享署名—非商业性使用—相同方式共享 4.0 协议国际版
+            </a>
+        </p>
+    </div>
+</aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content" id="mainContent">
+            <button class="toggle-btn" id="toggleBtn" title="收起/展开边栏">☰</button>
+            <div class="page-content active">
+                <article class="page-full">
+    <h1>project</h1>
+    <div class="page-content-text">
+        <h1 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h1><p><a target="_blank" rel="noopener" href="https://github.com/SuYoki-Ayas/CUTEE"><strong>Project.CUTEE</strong></a> - 这是一个学生党与Oier的工具包~ <strong>目前还在开发中</strong></p>
+<ul>
+<li>技术参数： <strong>使用Qt6开发</strong></li>
+<li>许可协议： <strong>GPL 3.0，CC BY-SA 4.0</strong></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/SuYoki-Ayas/SuYoki-Ayas.github.io"><strong>博客~</strong></a> - 是的！就是你现在看到的这个页面~</p>
+
+    </div>
+</article>
+            </div>
+            <!-- 主界面脚注（侧栏收起时显示） -->
+            <div class="main-footer">
+    <p>© 2026 SuYoki-Ayas</p>
+    <p class="cc-license">
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank" rel="noopener noreferrer">
+            知识共享署名—非商业性使用—相同方式共享 4.0 协议国际版
+        </a>
+    </p>
+</div>
+        </main>
+    </div>
+
+    <script>
+        (function() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            const toggleBtn = document.getElementById('toggleBtn');
+            let sidebarVisible = true;
+
+            toggleBtn.addEventListener('click', function() {
+                sidebarVisible = !sidebarVisible;
+                if (sidebarVisible) {
+                    sidebar.classList.remove('sidebar-collapsed');
+                    mainContent.classList.remove('main-expanded');
+                    mainContent.classList.remove('footer-visible');
+                    toggleBtn.textContent = '☰';
+                } else {
+                    sidebar.classList.add('sidebar-collapsed');
+                    mainContent.classList.add('main-expanded');
+                    mainContent.classList.add('footer-visible');
+                    toggleBtn.textContent = '☰';
+                }
+            });
+
+            // 移动端恢复
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768 && !sidebarVisible) {
+                    sidebar.classList.remove('sidebar-collapsed');
+                    mainContent.classList.remove('main-expanded');
+                    mainContent.classList.remove('footer-visible');
+                    sidebarVisible = true;
+                    toggleBtn.textContent = '☰';
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
