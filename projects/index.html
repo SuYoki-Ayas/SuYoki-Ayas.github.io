@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>project | SuYoki 的 Blog~~</title>
+    <title>项目~ | SuYoki 的 Blog~~</title>
     <link rel="stylesheet" href="/css/maoboli.css">
 <meta name="generator" content="Hexo 8.1.2"></head>
 <body>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <div class="page-container">
         <!-- 侧边栏 -->
         <aside class="sidebar" id="sidebar">
@@ -55,9 +56,9 @@
             <button class="toggle-btn" id="toggleBtn" title="收起/展开边栏">☰</button>
             <div class="page-content active">
                 <article class="page-full">
-    <h1>project</h1>
+    <h1>项目~</h1>
     <div class="page-content-text">
-        <h1 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h1><p><a target="_blank" rel="noopener" href="https://github.com/SuYoki-Ayas/CUTEE"><strong>Project.CUTEE</strong></a> - 这是一个学生党与Oier的工具包~ <strong>目前还在开发中</strong></p>
+        <p><a target="_blank" rel="noopener" href="https://github.com/SuYoki-Ayas/CUTEE"><strong>Project.CUTEE</strong></a> - 这是一个学生党与Oier的工具包~ <strong>目前还在开发中</strong></p>
 <ul>
 <li>技术参数： <strong>使用Qt6开发</strong></li>
 <li>许可协议： <strong>GPL 3.0，CC BY-SA 4.0</strong></li>
@@ -79,7 +80,7 @@
         </main>
     </div>
 
-    <script>
+<script>
     (function() {
         const sidebar = document.getElementById('sidebar');
         const mainContent = document.getElementById('mainContent');
@@ -87,12 +88,12 @@
         const overlay = document.getElementById('sidebarOverlay');
         let sidebarVisible = true;
 
-        // 移动端初始状态：默认收起
+        // 移动端初始状态：默认收起侧栏
         if (window.innerWidth <= 768) {
             sidebar.classList.add('sidebar-collapsed');
             mainContent.classList.add('main-expanded');
             mainContent.classList.add('footer-visible');
-            if (overlay) overlay.classList.remove('show');
+            overlay.classList.remove('show');
             sidebarVisible = false;
         }
 
@@ -101,7 +102,7 @@
             sidebar.classList.remove('sidebar-collapsed');
             mainContent.classList.remove('main-expanded');
             mainContent.classList.remove('footer-visible');
-            if (overlay) overlay.classList.add('show');
+            overlay.classList.add('show');
             sidebarVisible = true;
             toggleBtn.textContent = '☰';
         }
@@ -111,14 +112,14 @@
             sidebar.classList.add('sidebar-collapsed');
             mainContent.classList.add('main-expanded');
             mainContent.classList.add('footer-visible');
-            if (overlay) overlay.classList.remove('show');
+            overlay.classList.remove('show');
             sidebarVisible = false;
             toggleBtn.textContent = '☰';
         }
 
-        // 点击 ☰ 按钮切换侧栏
+        // 点击 ☰ 按钮切换
         toggleBtn.addEventListener('click', function(event) {
-            event.stopPropagation();   // 关键：阻止冒泡
+            event.stopPropagation();   // 防止冒泡到 mainContent
             if (sidebarVisible) {
                 closeSidebar();
             } else {
@@ -138,22 +139,32 @@
             }
         });
 
-        // 窗口尺寸变化时恢复桌面布局
+        // 导航链接点击后，移动端自动收起侧栏
+        const navLinks = document.querySelectorAll('.sidebar-nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    closeSidebar();
+                }
+            });
+        });
+
+        // 窗口尺寸变化时调整
         window.addEventListener('resize', function() {
             if (window.innerWidth > 768) {
-                // 桌面端确保侧栏展开
+                // 桌面端恢复侧栏展开
                 sidebar.classList.remove('sidebar-collapsed');
                 mainContent.classList.remove('main-expanded');
                 mainContent.classList.remove('footer-visible');
-                if (overlay) overlay.classList.remove('show');
+                overlay.classList.remove('show');
                 sidebarVisible = true;
                 toggleBtn.textContent = '☰';
             } else {
-                // 移动端自动收起
+                // 移动端确保侧栏收起
                 sidebar.classList.add('sidebar-collapsed');
                 mainContent.classList.add('main-expanded');
                 mainContent.classList.add('footer-visible');
-                if (overlay) overlay.classList.remove('show');
+                overlay.classList.remove('show');
                 sidebarVisible = false;
             }
         });
