@@ -1132,7 +1132,6 @@ blockquote {
 .post-card .post-card-link {
     display: inline-flex;
     flex: 0 0 auto;
-    max-width: min(52%, 360px);
     min-height: 36px;
     box-sizing: border-box;
     align-items: center;
@@ -1151,6 +1150,7 @@ blockquote {
 }
 
 .post-card-link-title {
+    max-width: 12ch;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
