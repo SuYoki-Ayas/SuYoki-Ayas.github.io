@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="<%=config.language%>" data-mdm-color="<%= theme.material && theme.material.primary_color ? theme.material.primary_color : '#6750A4' %>">
+<!--Head-->
+<%- partial('partials/head') %>
+<body>
+  <!--header_bar-->
+  <%- partial('partials/headerbar') %>
+  <!--Header-->
+  <%- partial('partials/header',{cache: true})%>
+
+  <main class="article-section" id="content-inner">
+    <%- body %>
+  </main>
+
+  <!--footer-->
+  <%- fragment_cache('footer', function(){
+    return partial('partials/footer');
+  }) %>
+
+  <!--goTop-->
+  <%- fragment_cache('gotop', function(){
+    return partial('partials/gotop');
+  }) %>
+</body>
+</html>

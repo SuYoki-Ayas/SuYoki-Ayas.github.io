@@ -6,3 +6,6 @@ node_modules/
 public/
 .deploy*/
 _multiconfig.yml
+# 本机专用目录，不随仓库分发
+.codegraph/
+themes/mdm/HexoWriteTool/

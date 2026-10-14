@@ -1,0 +1,57 @@
+<!-- Tags -->
+<%
+    var sortedTags = site.tags.sort('name').toArray();
+    var requestedAggregateAdLimit = parseInt(theme.SEO.AggregateAdLimit, 10);
+    var aggregateAdLimit = theme.SEO.GoogleAd === true
+        ? Math.min(3, Math.max(0, Number.isFinite(requestedAggregateAdLimit) ? requestedAggregateAdLimit : 3))
+        : 0;
+    var tagAdPositions = [];
+    if (aggregateAdLimit > 1 && sortedTags.length > 0) tagAdPositions.push(Math.ceil(sortedTags.length / 3));
+    if (aggregateAdLimit > 2 && sortedTags.length > 0) tagAdPositions.push(Math.ceil(sortedTags.length * 2 / 3));
+%>
+
+<div class="article">
+    <div class="post_tag elevated-card">
+        <!--Tag Summary-->
+        <h3>&#20849;&#35745;&nbsp;<%= site.tags.length %>&nbsp;&#20010;&#26631;&#31614;</h3>
+        <% sortedTags.forEach(function(item){ %>
+            <% if(item.posts.length){ %>
+                <a class="tag-chip" href="#<%= item.name %>">
+                    <%= item.name %>
+                </a>
+            <% } %>
+        <% }); %>
+    </div>
+
+    <% if(aggregateAdLimit > 0){ %>
+        <!--鏂囩珷鍐呭骞垮憡-->
+        <%- partial('partials/ad_item') %>
+    <% } %>
+
+    <!-- Tag List -->
+    <mdui-collapse accordion class="post-collapse post_tag_list">
+    <% sortedTags.forEach(function(tag, tagIndex){ %>
+        <mdui-collapse-item id="<%= tag.name %>">
+            <div slot="header" class="post-collapse-header">
+                <div class="post-collapse-title" id="tag-title-<%= tag.name %>"><%= tag.name %></div>
+                <div class="post-collapse-summary">&#20849;<%= tag.length %>&#31687;</div>
+            </div>
+            <div class="post-collapse-body">
+                <% tag.posts.forEach(function(post){ %>
+                    <span class="post-time">
+                        <time datetime="<%= date_xml(post.date) %>"><%= post.date.format('MM-DD') %></time>
+                    </span>
+                    <a class="post-name" href="<%= url_for(post.path) %>"><span class="material-symbols-rounded archive-item-icon">article</span><span><%= post.title || "Untitled" %></span></a>
+                <hr>
+                <% }) %>
+            </div>
+        </mdui-collapse-item>
+        <% if(tagAdPositions.indexOf(tagIndex + 1) !== -1){ %>
+            <div class="aggregate-ad-slot">
+                <!--鍐呭骞垮憡-->
+                <%- partial('partials/ad/horizontal.ad.ejs') %>
+            </div>
+        <% } %>
+    <% }) %>
+    </mdui-collapse>
+</div>

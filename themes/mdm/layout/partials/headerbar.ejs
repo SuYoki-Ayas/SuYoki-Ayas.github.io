@@ -1,0 +1,72 @@
+<%
+    var shareUrl = full_url_for(page.path || '/').replace(/\/index\.html$/, '/');
+    var encodedShareUrl = encodeURIComponent(shareUrl);
+    var encodedShareTitle = encodeURIComponent(page.title || config.title);
+    var encodedShareDescription = encodeURIComponent(page.description || config.description || '');
+    var encodedShareImage = encodeURIComponent(full_url_for(page.img || theme.favicon || theme.no_img || '/favicon.ico'));
+    var encodedShareAuthor = encodeURIComponent(config.author || '');
+%>
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title"><%= config.title %></div>
+            <div class="navigation-drawer-label"><%= config.description %></div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        <% Object.keys(theme.menu).forEach(key => { %>
+            <% var open_type = theme.menu[key].open_mode; if(open_type != "_blank"){open_type = "_self";} %>
+            <a class="navigation-drawer-link" href="<%= url_for(theme.menu[key].url) %>" target="<%= open_type %>"<% if(open_type === '_blank'){ %> rel="noopener noreferrer"<% } %>>
+                <span class="material-symbols-rounded" aria-hidden="true"><%= theme.menu[key].icon %></span>
+                <span><%= theme.menu[key].text %></span>
+            </a>
+        <% }); %>
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title"><%= config.title %></mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        <% Object.keys(theme.menu).forEach(key => { %>
+            <% var open_type = theme.menu[key].open_mode; if(open_type != "_blank"){open_type = "_self";} %>
+            <a href="<%= url_for(theme.menu[key].url) %>" target="<%= open_type %>" class="top-nav-link"<% if(open_type === '_blank'){ %> rel="noopener noreferrer"<% } %>><%= theme.menu[key].text %></a>
+        <% }); %>
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    <% if(theme.share.enable){ %>
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            <% if(theme.share.facebook === true) { %>
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=<%= encodedShareUrl %>" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            <% } %>
+            <% if(theme.share.qq === true) { %>
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=<%= encodeURIComponent(config.title) %>&amp;title=<%= encodedShareTitle %>&amp;summary=<%= encodedShareDescription %>&amp;pics=<%= encodedShareImage %>&amp;url=<%= encodedShareUrl %>" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            <% } %>
+            <% if(theme.share.twitter === true) { %>
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=<%= encodedShareTitle %>&amp;url=<%= encodedShareUrl %>&amp;via=<%= encodedShareAuthor %>" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            <% } %>
+            <% if(theme.share.weibo === true) { %>
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=<%= encodedShareTitle %>&amp;url=<%= encodedShareUrl %>&amp;pic=<%= encodedShareImage %>&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            <% } %>
+            <% if(theme.share.telegram === true) { %>
+                <mdui-menu-item href="https://telegram.me/share/url?url=<%= encodedShareUrl %>&amp;text=<%= encodedShareTitle %>" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            <% } %>
+            <% if(theme.share.linkedin === true) { %>
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=<%= encodedShareUrl %>&amp;title=<%= encodedShareTitle %>" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            <% } %>
+        </mdui-menu>
+    </mdui-dropdown>
+    <%}%>
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>

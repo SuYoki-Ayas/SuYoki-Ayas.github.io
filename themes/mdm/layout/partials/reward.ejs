@@ -1,0 +1,19 @@
+<% if(theme.reward.enable){ %>
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="<%= theme.reward.title %>">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="<%=theme.reward.alipay%>" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="<%=theme.reward.wechat%>" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+<% } %>

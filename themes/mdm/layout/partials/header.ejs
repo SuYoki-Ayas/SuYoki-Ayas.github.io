@@ -1,0 +1,32 @@
+<%
+    var bg = is_post() ? page.img : theme.index_header_img;
+    var title = page.title || config.title;
+    var isTagsAggregate = page.type === 'tags' || page.layout === 'tags';
+    var isArchivesAggregate = page.type === 'archives' || page.layout === 'archive';
+
+    if (is_home()) {
+        title = config.title;
+    } else if (isTagsAggregate) {
+        title = __('global.tags');
+    } else if (isArchivesAggregate) {
+        title = __('global.archives');
+    } else if (page.type === 'about' || is_current('/about')) {
+        title = __('global.about');
+    }
+
+    if (!bg) bg = theme.no_img;
+%>
+
+<header class="header" style="background-image: url(<%= url_for(bg) %>)" data-mdm-error-bg="<%= url_for(theme.default_error_img) %>">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title"><%= title %></h1>
+            <% if (is_home()) { %>
+                <p class="header-subtitle"><%= theme.index_subtitle %></p>
+            <% } else { %>
+                <p id="hitokoto">一言加载中...</p>
+            <% } %>
+        </div>
+    </div>
+</header>

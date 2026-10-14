@@ -1,0 +1,15 @@
+<mdui-card variant="elevated" class="post-card">
+    <div class="post-card-media">
+        <video class="post-card-video" style="max-height: 450px;" controls>
+            <source src="<%- item.video %>" type="video/mp4" >
+        </video>
+    </div>
+    <div class="post-card-actions">
+        <p class="post-card-summary" style="text-align:center; font-weight:100;"><%- item.content %></p>
+        <mdui-divider></mdui-divider>
+        <span class="info">
+            <span class="material-symbols-rounded info-icon">calendar_today</span>
+            <time datetime="<%= date_xml(item.date) %>"><%= item.date.format("YYYY-MM-DD") %></time>
+        </span>
+    </div>
+</mdui-card>

@@ -1,0 +1,8 @@
+<mdui-card variant="filled" class="article category-list content-card">
+  <h3>&#20849;&#35745;&nbsp;<%= site.categories.length %>&nbsp;&#20010;&#20998;&#31867;</h3>
+  <% site.categories.sort('name').each(function(item){ %>
+      <% if(item.posts.length){ %>
+          <a class="tag-chip category-chip" href="<%- url_for(item.path) %>"><span class="category-chip-count"><%= item.posts.length %></span><%= item.name %></a>
+      <% } %>
+  <% }); %>
+</mdui-card>
