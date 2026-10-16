@@ -1599,15 +1599,17 @@ footer,
 .site-footer-content {
     display: flex;
     min-height: 88px;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 6px;
     box-sizing: border-box;
     padding: 20px 16px;
     text-align: center;
 }
 
-.site-footer-copyright {
+.site-footer-copyright,
+.site-footer-powered {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -1779,12 +1781,12 @@ footer,
 
     .site-footer-content {
         min-height: 0;
-        flex-direction: column;
-        gap: 8px;
+        gap: 6px;
         padding: 18px 8px;
     }
 
-    .site-footer-copyright {
+    .site-footer-copyright,
+    .site-footer-powered {
         gap: 4px;
         font-size: 0.8rem;
         line-height: 1.4;

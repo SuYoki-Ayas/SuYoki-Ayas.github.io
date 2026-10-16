@@ -1,20 +1,471 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8;"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="theme-color" content="#6750A4" />
   <meta name="robots" content="noindex,follow" />
-  <meta name="description" content="请求的页面不存在，请返回默然的博客继续浏览。" />
-  <link rel="canonical" href="https://blog.tonychenn.cn/404.html" />
-  <title>页面未找到｜默然的博客</title>
-  <link rel="stylesheet" type="text/css" href="https://qzone.qq.com/gy/404/style/404style.css">
+  <meta name="description" content="请求的页面不存在，请返回 SuYoki's BLOG 继续浏览。" />
+  <link rel="canonical" href="https://suyoki-ayas.github.io/404.html" />
+  <link rel="icon" href="/favicon.ico" />
+  <title>页面未找到｜SuYoki's BLOG</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <script>
+    // 与主题 mdm.js 保持一致：优先读取 localStorage，其次读取旧版 Cookie
+    (function () {
+      function readTheme() {
+        try {
+          var stored = window.localStorage.getItem('mdm-theme');
+          if (stored === 'dark' || stored === 'light') return stored;
+        } catch (error) {
+          // localStorage 不可用时继续读取 Cookie
+        }
+        var matched = document.cookie.match(/(?:^|;\s*)IsDayTime=(true|false)/);
+        if (matched) return matched[1] === 'false' ? 'dark' : 'light';
+        return 'light';
+      }
+      document.documentElement.setAttribute('data-theme', readTheme());
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --primary: #6750a4;
+      --on-primary: #ffffff;
+      --surface: #fef7ff;
+      --surface-container: #f3edf7;
+      --surface-container-highest: #e6e0e9;
+      --on-surface: #1d1b20;
+      --on-surface-variant: #49454f;
+      --outline: #79747e;
+      --outline-variant: #cac4d0;
+      --inverse-surface: #313033;
+      --inverse-on-surface: #f4eff4;
+      --mdm-content-width: 1120px;
+      --mdm-shape-medium: 16px;
+      --mdm-shape-large: 24px;
+    }
+
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --primary: #d0bcff;
+      --on-primary: #381e72;
+      --surface: #141218;
+      --surface-container: #211f26;
+      --surface-container-highest: #36343b;
+      --on-surface: #e6e0e9;
+      --on-surface-variant: #cac4d0;
+      --outline: #938f99;
+      --outline-variant: #49454f;
+      --inverse-surface: #e6e0e9;
+      --inverse-on-surface: #313033;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+      margin: 0;
+      background: var(--surface);
+      color: var(--on-surface);
+      font-family: Roboto, "Noto Sans SC", "Microsoft YaHei", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      overflow-wrap: anywhere;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .app-bar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      min-height: 64px;
+      padding: 12px 8px;
+      background: color-mix(in srgb, var(--surface-container) 94%, transparent);
+      color: var(--on-surface);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .app-bar-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      margin-left: 20px;
+    }
+
+    .app-bar-links a {
+      display: inline-flex;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      border-radius: 999px;
+      color: var(--on-surface);
+      font-size: 0.82em;
+      transition: background-color 0.2s ease;
+    }
+
+    .app-bar-links a:hover {
+      background: var(--surface-container-highest);
+    }
+
+    .theme-toggle-wrap {
+      position: relative;
+      display: flex;
+      margin-left: auto;
+      margin-right: 5px;
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      width: 40px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--on-surface);
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      background: color-mix(in srgb, var(--on-surface) 8%, transparent);
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 3px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .theme-toggle .material-icons {
+      font-size: 24px;
+    }
+
+    .theme-tooltip {
+      position: absolute;
+      top: calc(100% + 4px);
+      right: 0;
+      z-index: 20;
+      visibility: hidden;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: var(--inverse-surface);
+      color: var(--inverse-on-surface);
+      font-size: 12px;
+      line-height: 16px;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(-4px) scale(0.9);
+      transform-origin: right top;
+      transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+    }
+
+    .theme-toggle-wrap:hover .theme-tooltip,
+    .theme-toggle:focus-visible + .theme-tooltip {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    main {
+      display: flex;
+      width: 100%;
+      flex: 1 0 auto;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 32px;
+    }
+
+    .card {
+      width: min(100%, 640px);
+      padding: 40px 32px;
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--mdm-shape-large);
+      background: var(--surface-container);
+      text-align: center;
+    }
+
+    .mascot {
+      display: block;
+      width: min(100%, 190px);
+      height: auto;
+      margin: 0 auto 8px;
+    }
+
+    .code {
+      color: var(--primary);
+      font-size: clamp(2.75rem, 13vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.06em;
+    }
+
+    .card h1 {
+      margin: 16px 0 8px;
+      font-size: 1.5rem;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--on-surface-variant);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      height: 40px;
+      align-items: center;
+      padding: 0 20px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      transition: box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    .btn-filled {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+
+    .btn-filled:hover {
+      box-shadow: 0 2px 6px color-mix(in srgb, var(--primary) 40%, transparent);
+    }
+
+    .btn-outlined {
+      border-color: var(--outline);
+      color: var(--primary);
+    }
+
+    .btn-outlined:hover {
+      background: color-mix(in srgb, var(--primary) 10%, transparent);
+    }
+
+    .site-footer {
+      width: 100%;
+      margin-top: 24px;
+      background: var(--surface-container);
+      color: var(--on-surface-variant);
+      font-size: 0.85rem;
+    }
+
+    .site-footer-inner {
+      display: flex;
+      min-height: 88px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: min(100% - 32px, var(--mdm-content-width));
+      margin: 0 auto;
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .site-footer-inner a {
+      color: var(--on-surface-variant);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .sep {
+      color: var(--outline);
+    }
+
+    @media (max-width: 600px) {
+      .app-bar-links {
+        margin-left: 8px;
+      }
+
+      .app-bar-links a {
+        padding: 0 12px;
+      }
+
+      .theme-toggle-wrap {
+        margin-right: 8px;
+      }
+
+      .card {
+        padding: 36px 20px;
+      }
+    }
+
+    /* 明暗主题切换动画，与主题 mdm.js / mdm.css 保持一致 */
+    html.mdm-theme-view-transition::view-transition-old(root) {
+      z-index: 1;
+      animation: none;
+    }
+
+    html.mdm-theme-view-transition::view-transition-new(root) {
+      z-index: 2;
+      animation: mdm-theme-reveal 460ms cubic-bezier(0.2, 0, 0, 1) both;
+    }
+
+    @keyframes mdm-theme-reveal {
+      from {
+        clip-path: circle(0 at var(--mdm-theme-x, calc(100% - 40px)) var(--mdm-theme-y, 40px));
+      }
+
+      to {
+        clip-path: circle(150vmax at var(--mdm-theme-x, calc(100% - 40px)) var(--mdm-theme-y, 40px));
+      }
+    }
+
+    html.mdm-theme-transitioning,
+    html.mdm-theme-transitioning body,
+    html.mdm-theme-transitioning .app-bar,
+    html.mdm-theme-transitioning .card,
+    html.mdm-theme-transitioning .site-footer,
+    html.mdm-theme-transitioning .btn {
+      transition: background-color 380ms ease, color 380ms ease, border-color 380ms ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
 </head>
 <body>
-  <script type="text/plain" src="https://www.qq.com/404/search_children.js"
-          charset="utf-8" homePageUrl="/"
-          homePageName="回到我的主页">
+  <header class="app-bar">
+    <nav class="app-bar-links" aria-label="主导航">
+      <a href="/">首页</a>
+      <a href="/tags/">标签</a>
+      <a href="/archives/">归档</a>
+      <a href="/about/">关于</a>
+    </nav>
+    <div class="theme-toggle-wrap">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换到深色主题"
+              aria-describedby="themeTooltip">
+        <span class="material-icons" aria-hidden="true">dark_mode</span>
+      </button>
+      <span class="theme-tooltip" id="themeTooltip" role="tooltip">切换到深色主题</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <img class="mascot" src="/404_homer.png" width="506" height="578"
+           alt="捂着脸、一脸无奈的荷马·辛普森" />
+      <div class="code" aria-hidden="true">404</div>
+      <h1>页面未找到</h1>
+      <p>这个页面好像走丢了，可能已被移动或删除。</p>
+      <div class="actions">
+        <a class="btn btn-filled" href="/">返回首页</a>
+        <a class="btn btn-outlined" href="/archives/">浏览归档</a>
+        <a class="btn btn-outlined" href="/tags/">查看标签</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div>Copyright &copy; SuYoki Ayas <span id="copyright-year"></span></div>
+      <div>
+        Powered By <a href="https://github.com/hexojs/hexo">Hexo</a>
+        <span class="sep">·</span>
+        Theme By <a href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('copyright-year').textContent = new Date().getFullYear();
   </script>
-  <script src="https://qzone.qq.com/gy/404/data.js" charset="utf-8"></script>
-  <script src="https://qzone.qq.com/gy/404/page.js" charset="utf-8"></script>
+
+  <script>
+    // 日月切换：读写与主题 mdm.js 相同的偏好（localStorage.mdm-theme + Cookie.IsDayTime）
+    (function () {
+      var html = document.documentElement;
+      var button = document.getElementById('themeToggle');
+      var icon = button.querySelector('.material-icons');
+      var tooltip = document.getElementById('themeTooltip');
+
+      function setCookie(key, value) {
+        var date = new Date();
+        date.setTime(date.getTime() + 365 * 24 * 3600 * 1000);
+        document.cookie = key + '=' + value + '; expires=' + date.toGMTString() + '; path=/';
+      }
+
+      function applyTheme(theme) {
+        var normalizedTheme = theme === 'dark' ? 'dark' : 'light';
+        var nextThemeLabel = normalizedTheme === 'dark' ? '切换到浅色主题' : '切换到深色主题';
+
+        html.setAttribute('data-theme', normalizedTheme);
+        setCookie('IsDayTime', normalizedTheme === 'light' ? 'true' : 'false');
+        try {
+          window.localStorage.setItem('mdm-theme', normalizedTheme);
+        } catch (error) {
+          // localStorage 不可用时 Cookie 仍可保持主题偏好
+        }
+
+        icon.textContent = normalizedTheme === 'dark' ? 'light_mode' : 'dark_mode';
+        button.setAttribute('aria-label', nextThemeLabel);
+        tooltip.textContent = nextThemeLabel;
+      }
+
+      button.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        var nextTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var buttonRect = button.getBoundingClientRect();
+        html.style.setProperty('--mdm-theme-x', buttonRect.left + buttonRect.width / 2 + 'px');
+        html.style.setProperty('--mdm-theme-y', buttonRect.top + buttonRect.height / 2 + 'px');
+
+        if (!reduceMotion && typeof document.startViewTransition === 'function') {
+          html.classList.add('mdm-theme-view-transition');
+          var transition = document.startViewTransition(function () {
+            applyTheme(nextTheme);
+          });
+          transition.finished.finally(function () {
+            html.classList.remove('mdm-theme-view-transition');
+          });
+          return;
+        }
+
+        if (!reduceMotion) {
+          html.classList.add('mdm-theme-transitioning');
+          window.requestAnimationFrame(function () {
+            applyTheme(nextTheme);
+            window.setTimeout(function () {
+              html.classList.remove('mdm-theme-transitioning');
+            }, 420);
+          });
+          return;
+        }
+
+        applyTheme(nextTheme);
+      });
+
+      applyTheme(html.getAttribute('data-theme'));
+    })();
+  </script>
 </body>
 </html>
