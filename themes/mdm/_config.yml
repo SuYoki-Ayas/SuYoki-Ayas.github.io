@@ -25,8 +25,9 @@ menu:
 
 # Material Design 3
 # MDUI 会根据种子色生成亮色与暗色的完整动态配色方案
+# 浅色模式的纸感色板在 source/css/mdm.css 中按角色覆盖，种子色与墨褐主色保持一致
 material:
-  primary_color: "#6750A4"
+  primary_color: "#7a4e26"
 
 CDN:
   enable: false
@@ -42,13 +43,16 @@ CDN:
 
 #  是否开启文章目录
 toc: false
-
 # 打赏
 reward:
   enable: false
   title: 写博客不易，请我喝杯咖啡？
   alipay: https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg
   wechat: https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg
+
+sakura:
+  enable: true
+# 樱花动效
 
 # 分享
 # 可选有 qq,qzone,wechat,douban,facebook,twitter,linkedin

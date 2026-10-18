@@ -49,7 +49,7 @@ li{
 
 body{
     margin: 0;
-    background-color: #fff;
+    background-color: #f0eadc;
     font-family: Baskerville, "Times New Roman", SimSun, serif;
     font-size: 22px;
     line-height: 1.8;
@@ -83,7 +83,7 @@ table th,
 table td{
     padding: 6px 13px;
     border-width: 1px;
-    border-color: #ddd;
+    border-color: rgb(var(--mdui-color-outline-variant));
     border-style: solid;
 }
 /*override代码表格style*/
@@ -296,7 +296,7 @@ figure table .gutter pre{
     /*滚动条的背景区域的内阴影*/
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3) inset;
     border-radius: 10px;
-    background-color: #ddd;
+    background-color: rgb(var(--mdui-color-surface-container-high));
 }
 
 
@@ -306,7 +306,7 @@ figure table .gutter pre{
     /*滚动条的内阴影*/
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3) inset;
     border-radius: 10px;
-    background-color: #aaa;
+    background-color: rgb(var(--mdui-color-outline));
 }
 
 
@@ -757,6 +757,62 @@ img {
     --mdm-shape-extra-large: 28px;
 }
 
+/* 浅色模式配色 · 米黄纸感（配合霞鹜文楷）
+   以 #f5ecd7 纸色打底，墨褐为主色、墨绿为副色、朱砂为点缀。
+   选择器优先级高于 mdui 运行时注入的配色，且不影响深色模式。 */
+html.mdui-theme-light,
+html:not(.mdui-theme-dark):not(.mdui-theme-auto) {
+    color-scheme: light;
+
+    /* 纸面与容器层级 */
+    --mdui-color-background: 245, 236, 215;
+    --mdui-color-on-background: 43, 36, 25;
+    --mdui-color-surface: 245, 236, 215;
+    --mdui-color-on-surface: 43, 36, 25;
+    --mdui-color-on-surface-container: 43, 36, 25;
+    --mdui-color-surface-variant: 232, 220, 196;
+    --mdui-color-on-surface-variant: 89, 78, 61;
+    --mdui-color-surface-container-lowest: 255, 252, 244;
+    --mdui-color-surface-container-low: 250, 243, 228;
+    --mdui-color-surface-container: 242, 232, 211;
+    --mdui-color-surface-container-high: 236, 224, 200;
+    --mdui-color-surface-container-highest: 229, 215, 187;
+    --mdui-color-surface-dim: 226, 212, 184;
+    --mdui-color-surface-bright: 255, 249, 236;
+    --mdui-color-inverse-surface: 53, 44, 30;
+    --mdui-color-inverse-on-surface: 247, 239, 221;
+    --mdui-color-outline: 138, 122, 96;
+    --mdui-color-outline-variant: 214, 200, 172;
+
+    /* 墨褐主色 */
+    --mdui-color-primary: 122, 78, 38;
+    --mdui-color-on-primary: 255, 250, 242;
+    --mdui-color-primary-container: 244, 224, 190;
+    --mdui-color-on-primary-container: 45, 26, 8;
+    --mdui-color-inverse-primary: 232, 197, 152;
+    --mdui-color-surface-tint-color: 122, 78, 38;
+
+    /* 墨绿副色 */
+    --mdui-color-secondary: 79, 107, 82;
+    --mdui-color-on-secondary: 249, 252, 245;
+    --mdui-color-secondary-container: 223, 231, 211;
+    --mdui-color-on-secondary-container: 23, 37, 19;
+
+    /* 朱砂点缀色 */
+    --mdui-color-tertiary: 163, 74, 51;
+    --mdui-color-on-tertiary: 255, 248, 245;
+    --mdui-color-tertiary-container: 247, 220, 207;
+    --mdui-color-on-tertiary-container: 51, 16, 10;
+
+    /* 状态色 */
+    --mdui-color-error: 169, 47, 38;
+    --mdui-color-on-error: 255, 248, 246;
+    --mdui-color-error-container: 246, 218, 213;
+    --mdui-color-on-error-container: 58, 10, 6;
+    --mdui-color-scrim: 0, 0, 0;
+    --mdui-color-shadow: 0, 0, 0;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -765,10 +821,17 @@ body {
     min-height: 100vh;
     background: rgb(var(--mdui-color-surface));
     color: rgb(var(--mdui-color-on-surface));
-    font-family: Roboto, "Noto Sans SC", "Microsoft YaHei", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: "LXGW WenKai", Roboto, "Noto Sans SC", "Microsoft YaHei", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 17px;
     line-height: 1.75;
     overflow-wrap: anywhere;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
 }
 
 h1,
@@ -977,6 +1040,19 @@ blockquote {
     color: rgba(255, 255, 255, 0.88);
     font-size: clamp(1rem, 2vw, 1.2rem);
     text-align: center;
+}
+
+#hitokoto-from {
+    max-width: 680px;
+    margin: 8px auto 0;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: clamp(0.82rem, 1.4vw, 0.95rem);
+    letter-spacing: 0.02em;
+    text-align: center;
+}
+
+#hitokoto-from:empty {
+    display: none;
 }
 
 .article-section {

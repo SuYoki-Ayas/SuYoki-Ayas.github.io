@@ -19,8 +19,16 @@
     </script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdn.coolcdn.cn/static/font-awesome/7.0.0/css/all.min.css" />
+
     <!--jquery-->
     <%- js('https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js') %>
+
+    <!--霞鹜文楷（LXGW WenKai）全局字体-->
+    <link rel="preconnect" href="https://registry.npmmirror.com" crossorigin />
+    <link rel="stylesheet" href="https://registry.npmmirror.com/lxgw-wenkai-webfont/1.7.0/files/lxgwwenkai-regular.css" />
+    <link rel="stylesheet" href="https://registry.npmmirror.com/lxgw-wenkai-webfont/1.7.0/files/lxgwwenkai-bold.css" />
 
     <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
 
@@ -28,10 +36,10 @@
     <%- css('css/mdm.css')%>
     <%- css('css/mdm_theme_dark.css')%>
     <script src="<%- url_for('/js/mdm.js') %>?v=20261014-header-bg"></script>
-    
+
     <!--高亮-->
     <%- css('css/solarized-light.css')%>
-    
+
     <!--全局变灰-->
     <% if(theme.SEO.GreyMode == true) { %>
         <%- css('css/grey.css')%>
@@ -41,14 +49,32 @@
     <% if(theme.ClickEffect.enable){%>
         <script async src="/js/click-effect.js"></script>
     <% } %>
-
+    <!----樱花-->
+    <% if(theme.sakura.enable){%>
+        <script async src="/js/sakura.js"></script>
+    <% } %>
     <!--代码块-->
     <%- js('libs/codeblock/codeblock.js')%>
     <%- css('libs/codeblock/codeblock.css')%>
 
     <!--一言-->
     <% if(!is_home()){ %>
-        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var textEl = document.getElementById('hitokoto');
+            if (!textEl) return;
+            var fromEl = document.getElementById('hitokoto-from');
+            fetch('https://v1.hitokoto.cn/').then(function (res) {
+                return res.json();
+            }).then(function (data) {
+                textEl.textContent = data.hitokoto || '';
+                var who = data.from_who || '';
+                var from = data.from || '';
+                var source = who && from ? who + '《' + from + '》' : (who || (from ? '《' + from + '》' : ''));
+                if (fromEl) fromEl.textContent = source ? '—— ' + source : '';
+            }).catch(function () {});
+        });
+    </script>
     <% } %>
 
 

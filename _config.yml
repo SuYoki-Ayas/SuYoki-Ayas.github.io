@@ -73,6 +73,17 @@ tag_map:
 ## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
 meta_generator: true
 
+# MathJax（hexo-filter-mathjax，服务端渲染，无需前端脚本）
+# 在文章 Front-matter 中设置 mathjax: true 后即可使用 $...$ / $$...$$
+mathjax:
+  tags: none
+  single_dollars: true
+  cjk_width: 0.9
+  normal_width: 0.6
+  append_css: true
+  every_page: false
+
+
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in
