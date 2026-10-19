@@ -59,10 +59,18 @@ SakuraList.prototype.size = function () {
     return this.list.length;
 }
 
-// 以 1920x1080 为基准，让飘落速度随视口分辨率线性缩放
+function isMobileViewport() {
+    return window.innerWidth <= 768;
+}
+
+// 以 1920x1080 为基准，让飘落速度随视口分辨率缩放，手机端再整体放慢
 function getResolutionScale() {
     var scale = Math.sqrt(window.innerWidth * window.innerHeight / (1920 * 1080));
-    return Math.min(Math.max(scale, 0.5), 3);
+    scale = Math.min(Math.max(scale, 0.5), 3);
+    if (isMobileViewport()) {
+        scale *= 0.6;
+    }
+    return scale;
 }
 
 function getRandom(option) {
@@ -75,7 +83,8 @@ function getRandom(option) {
             ret = Math.random() * window.innerHeight;
             break;
         case 's':
-            ret = Math.random();
+            // 手机端收窄大小差异，避免花瓣过大或过小
+            ret = isMobileViewport() ? 0.35 + Math.random() * 0.35 : Math.random();
             break;
         case 'r':
             ret = Math.random() * 6;
@@ -114,7 +123,8 @@ function startSakura() {
     document.getElementsByTagName('body')[0].appendChild(canvas);
     cxt = canvas.getContext('2d');
     var sakuraList = new SakuraList();
-    for (var i = 0; i < 50; i++) {
+    var sakuraCount = isMobileViewport() ? 24 : 50;
+    for (var i = 0; i < sakuraCount; i++) {
         var sakura, randomX, randomY, randomS, randomR, randomFnx, randomFny;
         randomX = getRandom('x');
         randomY = getRandom('y');
