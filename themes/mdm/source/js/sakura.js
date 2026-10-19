@@ -59,6 +59,12 @@ SakuraList.prototype.size = function () {
     return this.list.length;
 }
 
+// 以 1920x1080 为基准，让飘落速度随视口分辨率线性缩放
+function getResolutionScale() {
+    var scale = Math.sqrt(window.innerWidth * window.innerHeight / (1920 * 1080));
+    return Math.min(Math.max(scale, 0.5), 3);
+}
+
 function getRandom(option) {
     var ret, random;
     switch (option) {
@@ -77,13 +83,13 @@ function getRandom(option) {
         case 'fnx':
             random = -0.5 + Math.random() * 1;
             ret = function (x, y) {
-                return x + 0.5 * random - 1.7;
+                return x + (0.5 * random - 0.85) * getResolutionScale();
             };
             break;
         case 'fny':
-            random = 1.5 + Math.random() * 0.7
+            random = 0.6 + Math.random() * 0.4;
             ret = function (x, y) {
-                return y + random;
+                return y + random * getResolutionScale();
             };
             break;
         case 'fnr':
@@ -133,7 +139,10 @@ function startSakura() {
     })
 }
 window.onresize = function () {
-    var canvasSnow = document.getElementById('canvas_snow');
+    var canvas = document.getElementById('canvas_sakura');
+    if (!canvas) return;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 }
 img.onload = function () {
     startSakura();
