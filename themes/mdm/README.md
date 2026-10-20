@@ -21,7 +21,7 @@
 
 ## 功能
 
-- 首页、文章、独立页面、标签、分类、归档和关于页
+- 首页、文章、独立页面、标签、分类、归档、关于和友链页
 - 自适应桌面与移动端布局
 - 可配置的 Material 主题种子色
 - 文章置顶及自定义置顶顺序
@@ -91,6 +91,42 @@ title: 关于
 type: about
 layout: about
 ---
+```
+
+### 友链页
+
+```bash
+npx hexo new page friends
+```
+
+编辑 `source/friends/index.md`：
+
+```yaml
+---
+title: 友链
+type: friends
+layout: friends
+---
+```
+
+然后在主题 `_config.yml` 的 `friends` 中填写友链信息，也可以在页面 Front-matter 中使用同名字段覆盖：
+
+```yaml
+friends:
+  - name: Hexo
+    url: https://hexo.io/
+    avatar: https://example.com/avatar.png # 可选，省略时显示站点名首字
+    description: 快速、简洁且高效的博客框架
+```
+
+并在 `menu` 中加入导航入口：
+
+```yaml
+menu:
+  Friends:
+    url: /friends/
+    icon: diversity_3
+    text: 友链
 ```
 
 归档页由 Hexo 自动生成。分类页使用 Hexo 的分类路由；如需在顶部菜单显示分类，可在主题的 `menu` 中自行添加入口。

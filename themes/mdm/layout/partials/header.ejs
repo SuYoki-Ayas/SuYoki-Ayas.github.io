@@ -10,6 +10,8 @@
         title = __('global.tags');
     } else if (isArchivesAggregate) {
         title = __('global.archives');
+    } else if (page.type === 'friends' || page.layout === 'friends' || is_current('/friends')) {
+        title = page.title || __('global.friends');
     } else if (page.type === 'about' || is_current('/about')) {
         title = __('global.about');
     }

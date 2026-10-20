@@ -18,10 +18,26 @@ menu:
     url: /archives/
     icon: library_books
     text: 归档
+  Friends:
+    url: /friends/
+    icon: diversity_3
+    text: 友链
   About:
     url: /about/
     icon: error_outline
     text: 关于
+
+# 友链页面
+# 每项支持 name、url、avatar、description 字段；avatar 省略时显示站点名首字
+# 也可以在 source/friends/index.md 的 Front-matter 中通过 friends 字段覆盖
+friends:
+  - name: Hexo
+    url: https://hexo.io/
+    description: 快速、简洁且高效的博客框架
+  - name: ZEC BLOG
+    url: https://zec-cn.pages.dev/
+    description: ZEC BLOG
+
 
 # Material Design 3
 # MDUI 会根据种子色生成亮色与暗色的完整动态配色方案

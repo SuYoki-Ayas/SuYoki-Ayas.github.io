@@ -1,0 +1,58 @@
+<%
+    var friends = Array.isArray(theme.friends) ? theme.friends : [];
+    if (Array.isArray(page.friends) && page.friends.length) {
+        friends = page.friends;
+    }
+%>
+
+<div class="friends-page">
+    <% if (page.content) { %>
+    <mdui-card variant="filled" class="content-card friends-intro">
+        <div class="content-card-body">
+            <%- page.content %>
+        </div>
+    </mdui-card>
+    <% } %>
+
+    <% if (friends.length) { %>
+    <div class="friends-grid">
+        <% friends.forEach(function(friend){ %>
+        <%
+            var name = String(friend.name || '未命名站点');
+            var friendUrl = String(friend.url || '#');
+            var description = String(friend.description || '');
+            var initial = name.trim().charAt(0).toUpperCase() || '?';
+            var hue = 0;
+            for (var i = 0; i < name.length; i++) {
+                hue = (hue * 31 + name.charCodeAt(i)) % 360;
+            }
+            var displayUrl = friendUrl.replace(/^https?:\/\//, '').replace(/\/$/, '');
+        %>
+        <mdui-card variant="elevated" class="friend-card">
+            <a class="friend-card-link" href="<%= friendUrl %>" target="_blank" rel="noopener noreferrer" aria-label="访问 <%= name %>">
+                <% if (friend.avatar) { %>
+                <img class="friend-avatar" src="<%= url_for(friend.avatar) %>" alt="<%= name %>" loading="lazy" decoding="async" width="52" height="52">
+                <% } else { %>
+                <span class="friend-avatar friend-avatar-fallback" style="--friend-hue: <%= hue %>;" aria-hidden="true"><%= initial %></span>
+                <% } %>
+                <span class="friend-card-body">
+                    <span class="friend-name"><%= name %></span>
+                    <% if (description) { %>
+                    <span class="friend-description"><%= description %></span>
+                    <% } %>
+                    <span class="friend-url"><%= displayUrl %></span>
+                </span>
+                <span class="material-symbols-rounded friend-arrow" aria-hidden="true">arrow_outward</span>
+            </a>
+        </mdui-card>
+        <% }); %>
+    </div>
+    <% } else { %>
+    <mdui-card variant="filled" class="content-card friends-empty">
+        <div class="content-card-body">
+            <span class="material-symbols-rounded friends-empty-icon" aria-hidden="true">group_add</span>
+            <p>还没有添加友链，欢迎来交换～</p>
+        </div>
+    </mdui-card>
+    <% } %>
+</div>
