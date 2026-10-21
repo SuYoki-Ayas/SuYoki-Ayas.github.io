@@ -3,13 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: SuYoki's BLOG
-subtitle: ''
-description: ''
+title: SuYoki's Blog
+subtitle: 'Blog my life'
+description: '随笔、学习与算法竞赛'
 keywords:
+  - 随笔
+  - 学习记录
+  - 算法竞赛
+  - OI
 author: SuYoki Ayas
 language: zh-CN
-timezone: ''
+timezone: Asia/Shanghai
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
